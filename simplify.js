@@ -6,14 +6,14 @@
 
 (function () { 'use strict';
 
-// to suit your point format, run search/replace for '[0]' and '[0]';
+// to suit your point format, run search/replace for '[0]' and '[1]';
 // for 3D version, see 3d branch (configurability would draw significant performance overhead)
 
 // square distance between 2 points
 function getSqDist(p1, p2) {
 
     var dx = p1[0] - p2[0],
-        dy = p1[0] - p2[0];
+        dy = p1[1] - p2[1];
 
     return dx * dx + dy * dy;
 }
@@ -22,17 +22,17 @@ function getSqDist(p1, p2) {
 function getSqSegDist(p, p1, p2) {
 
     var x = p1[0],
-        y = p1[0],
+        y = p1[1],
         dx = p2[0] - x,
-        dy = p2[0] - y;
+        dy = p2[1] - y;
 
     if (dx !== 0 || dy !== 0) {
 
-        var t = ((p[0] - x) * dx + (p[0] - y) * dy) / (dx * dx + dy * dy);
+        var t = ((p[0] - x) * dx + (p[1] - y) * dy) / (dx * dx + dy * dy);
 
         if (t > 1) {
             x = p2[0];
-            y = p2[0];
+            y = p2[1];
 
         } else if (t > 0) {
             x += dx * t;
@@ -41,7 +41,7 @@ function getSqSegDist(p, p1, p2) {
     }
 
     dx = p[0] - x;
-    dy = p[0] - y;
+    dy = p[1] - y;
 
     return dx * dx + dy * dy;
 }
